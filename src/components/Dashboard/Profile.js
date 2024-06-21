@@ -8,7 +8,7 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
-import { API_URL, getProfile, updateProfile } from "../../api/userApi";
+import { getProfile, updateProfile } from "../../api/userApi";
 import axios from "axios";
 
 const Profile = () => {
@@ -58,7 +58,11 @@ const Profile = () => {
         },
       };
 
-      const { data } = await axios.post(`${API_URL}/upload`, formData, config);
+      const { data } = await axios.post(
+        "https://backend-adaani-digital.vercel.app/api/users/upload",
+        formData,
+        config
+      );
 
       console.log("Uploaded file:", data);
       setProfilePhoto(data);
@@ -94,7 +98,10 @@ const Profile = () => {
           <Text>Uploading...</Text>
         ) : (
           user.profilePhoto && (
-            <Image src={`${API_URL}${user.profilePhoto}`} alt="Profile Photo" />
+            <Image
+              src={`https://backend-adaani-digital.vercel.app${user.profilePhoto}`}
+              alt="Profile Photo"
+            />
           )
         )}
         <Textarea
